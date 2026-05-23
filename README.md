@@ -1,4 +1,3 @@
-````markdown
 # Zero-Day Fraud Detection in Dynamic Heterogeneous Transaction Networks using Hybrid GNN + Graph Autoencoder
 
 A Graph Machine Learning based fraud detection framework designed for detecting both **known fraud patterns** and **zero-day (previously unseen) fraudulent activities** using a hybrid approach combining:
