@@ -4,6 +4,7 @@ __pycache__/
 *.pt
 *.npy
 *.npz
+*.png
 .env
 env/
 venv/
