@@ -1,6 +1,6 @@
 # Zero-Day Fraud Detection in Dynamic Heterogeneous Transaction Networks using Hybrid GNN + Graph Autoencoder
 
-A Graph Machine Learning based fraud detection framework designed for detecting both **known fraud patterns** and **zero-day (previously unseen) fraudulent activities** using a hybrid approach combining:
+A Graph Machine Learning based fraud detection framework designed for detecting both **known fraud patterns** and **zero-day (previously unseen) fraudulent activities** using a hybrid deep learning approach combining:
 
 - Variational Graph Autoencoder (VGAE)
 - Relational Graph Convolution Network (RGCN)
@@ -11,17 +11,17 @@ The project models financial transactions as graph structures and combines:
 
 - **Unsupervised anomaly learning** using VGAE
 - **Supervised graph learning** using RGCN
-- **Fusion of both embeddings** for final fraud prediction
+- **Fusion of graph embeddings** for final fraud prediction
 
 ---
 
-## Project Motivation
+# Project Motivation
 
-Traditional fraud detection systems rely heavily on:
+Traditional fraud detection systems mainly rely on:
 
-- Static tabular datasets
-- Supervised learning
-- Large labeled datasets
+- static tabular datasets
+- supervised learning
+- large labeled datasets
 
 These approaches struggle to detect:
 
@@ -29,10 +29,25 @@ These approaches struggle to detect:
 - evolving attacker behavior
 - zero-day fraud scenarios
 
-This project addresses those limitations by leveraging Graph Machine Learning techniques that learn both:
+This project addresses those limitations by leveraging **Graph Machine Learning** techniques capable of learning:
 
-- structural relationships
-- transaction behavior patterns
+- transaction relationships
+- structural dependencies
+- behavioral patterns
+- graph anomalies
+
+---
+
+# Key Features
+
+- Graph-based transaction modeling
+- Zero-day fraud detection using VGAE
+- Relational fraud learning using RGCN
+- Hybrid fusion architecture
+- Dynamic transaction network representation
+- Transaction Network Graph visualization
+- Fraud prediction pipeline
+- Performance evaluation & visualization
 
 ---
 
@@ -48,7 +63,7 @@ Preprocessing
 Graph Construction
    ↓
 
-Heterogeneous Transaction Graph
+Dynamic Transaction Network Graph
    ↓
 
 VGAE
@@ -56,7 +71,7 @@ VGAE
    ↓
 
 RGCN
-(Known fraud learning)
+(Relational fraud learning)
    ↓
 
 Fusion Layer
@@ -65,20 +80,22 @@ Fusion Layer
 Final Fraud Prediction
    ↓
 
-Evaluation
+Evaluation & Visualization
 ```
 
 ---
 
 # Datasets Used
 
-The project uses multiple datasets to simulate real-world transaction environments.
+The project uses multiple datasets to simulate realistic financial transaction environments.
+
+---
 
 ## 1. PaySim Dataset
 
-Synthetic mobile money transaction dataset containing:
+Synthetic mobile money transaction dataset.
 
-Features:
+### Features
 
 - transaction amount
 - transaction type
@@ -87,7 +104,7 @@ Features:
 - timestamp
 - fraud label
 
-Expected file:
+### Expected file
 
 ```text
 datasets/
@@ -98,16 +115,17 @@ datasets/
 
 ## 2. Elliptic Bitcoin Dataset
 
-Bitcoin transaction graph dataset containing:
+Bitcoin transaction graph dataset.
 
-Features:
+### Features
 
 - transaction IDs
 - transaction classes
 - temporal information
-- transaction connections
+- transaction edges
+- transaction connectivity
 
-Expected files:
+### Expected files
 
 ```text
 datasets/
@@ -144,11 +162,21 @@ Hybrid-Fraud-Detection/
 │   ├── fusion_model.py
 │   ├── train.py
 │   ├── predict.py
-│   └── visualize.py
+│   ├── visualize.py
+│   └── transaction_network.py
 │
-├── requirements.txt
+├── outputs/
+│   │
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── transaction_network.png
+│   ├── vgae_loss.png
+│   ├── rgcn_loss.png
+│   └── fusion_loss.png
 │
 ├── hybrid_model.pt
+│
+├── requirements.txt
 │
 ├── README.md
 │
@@ -163,7 +191,11 @@ Clone repository:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/Hybrid-Fraud-Detection.git
+```
 
+Move into project folder:
+
+```bash
 cd Hybrid-Fraud-Detection
 ```
 
@@ -184,14 +216,15 @@ pandas
 numpy
 scikit-learn
 matplotlib
+networkx
 torch
 torch-geometric
 ```
 
-Install manually if needed:
+Manual installation:
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib torch torch-geometric
+pip install pandas numpy scikit-learn matplotlib networkx torch torch-geometric
 ```
 
 ---
@@ -219,18 +252,13 @@ datasets/
 └── elliptic_txs_edgelist.csv
 ```
 
-Note:
-
-Dataset files are ignored using `.gitignore` because:
-
-- datasets are large
-- GitHub has size limitations
-
 ---
 
 # Running the Project
 
-## Step 1: Train Hybrid Model
+---
+
+## Step 1 — Train Hybrid Model
 
 Run:
 
@@ -242,20 +270,21 @@ This performs:
 
 - dataset loading
 - preprocessing
-- graph creation
+- graph construction
+- transaction network generation
 - VGAE training
 - RGCN training
 - fusion model training
 - evaluation
 - model saving
 
-Output:
+### Generated files
 
 ```text
 hybrid_model.pt
 ```
 
-Saved intermediate files:
+### Saved intermediate outputs
 
 ```text
 results_true.npy
@@ -273,7 +302,7 @@ fusion_losses.npy
 
 ---
 
-## Step 2: Run Prediction
+## Step 2 — Run Prediction
 
 After training:
 
@@ -283,11 +312,11 @@ python src/predict.py
 
 This performs:
 
-- loading saved model
-- graph generation
+- loading trained model
+- graph reconstruction
 - fraud prediction
 
-Example output:
+### Example output
 
 ```text
 First 20 predictions:
@@ -307,7 +336,7 @@ Where:
 
 ---
 
-## Step 3: Generate Visualization Results
+## Step 3 — Generate Visualizations
 
 Run:
 
@@ -315,7 +344,7 @@ Run:
 python src/visualize.py
 ```
 
-Generated images:
+Generated visual outputs:
 
 ```text
 confusion_matrix.png
@@ -333,6 +362,36 @@ fusion_loss.png
 
 ---
 
+# Transaction Network Graph
+
+The project represents financial transactions as a **directed graph network**.
+
+### Graph Representation
+
+```text
+Nodes  → Accounts / Users / Transactions
+
+Edges  → Transaction relationships
+```
+
+### Purpose
+
+The Transaction Network Graph helps visualize:
+
+- suspicious transaction patterns
+- fraud clusters
+- abnormal node connectivity
+- graph structure learned by GNNs
+
+### Fraud Visualization
+
+- Normal nodes → blue
+- Fraud nodes → red
+
+This graph demonstrates the core Graph Machine Learning concept used in the project.
+
+---
+
 # Evaluation Metrics
 
 The project evaluates performance using:
@@ -341,7 +400,7 @@ The project evaluates performance using:
 - Precision
 - Recall
 - F1-score
-- ROC-AUC
+- ROC-AUC Score
 - Confusion Matrix
 
 ---
@@ -371,9 +430,30 @@ ROC-AUC:
 
 # Generated Visualizations
 
-The project generates:
+---
 
-### Confusion Matrix
+## 1. Transaction Network Graph
+
+Shows:
+
+- transaction relationships
+- connected accounts
+- fraud node patterns
+- graph topology
+
+---
+
+## 2. ROC Curve
+
+Shows:
+
+- True Positive Rate
+- False Positive Rate
+- model discrimination capability
+
+---
+
+## 3. Confusion Matrix
 
 Shows:
 
@@ -382,24 +462,11 @@ Shows:
 - False Positives
 - False Negatives
 
-### ROC Curve
+---
 
-Shows:
+## 4. Loss Curves
 
-- True Positive Rate
-- False Positive Rate
-
-### Transaction Network Graph
-
-Shows:
-
-- Accounts/transactions as a transaction graph
-- Fraud nodes highlighted in red
-- Suspicious local structure around fraudulent activity
-
-### Training Loss Curves
-
-For:
+Training convergence for:
 
 - VGAE
 - RGCN
@@ -409,22 +476,25 @@ For:
 
 # Core Models
 
-## VGAE
+---
+
+## VGAE (Variational Graph Autoencoder)
 
 Used for:
 
-- anomaly detection
-- latent graph representation
+- graph anomaly detection
+- latent graph representation learning
 - zero-day fraud identification
 
 ---
 
-## RGCN
+## RGCN (Relational Graph Convolution Network)
 
 Used for:
 
 - supervised fraud learning
-- neighborhood information aggregation
+- relational message passing
+- neighborhood aggregation
 
 ---
 
@@ -440,7 +510,7 @@ VGAE embeddings
 RGCN embeddings
 ```
 
-to produce:
+to generate:
 
 ```text
 Final Fraud Prediction
@@ -450,18 +520,38 @@ Final Fraud Prediction
 
 # Future Improvements
 
-Possible extensions:
+Possible future extensions:
 
-- Temporal graph snapshots
-- Dynamic graph learning
+- temporal graph snapshots
+- dynamic graph learning
 - Graph Attention Networks (GAT)
-- Explainable AI methods
-- Real-time fraud detection
-- Additional heterogeneous node types:
+- explainable AI methods
+- real-time fraud detection
+- fully heterogeneous graph modeling
 
-    - users
-    - merchants
-    - devices
-    - IP addresses
+Additional node types:
+
+- users
+- merchants
+- devices
+- IP addresses
+- locations
 
 ---
+
+# Research Contribution
+
+This project contributes toward:
+
+- zero-day fraud detection
+- graph-based anomaly detection
+- hybrid GNN architectures
+- dynamic transaction network analysis
+
+using Graph Machine Learning techniques.
+
+---
+
+# License
+
+This project is intended for academic and research purposes.
