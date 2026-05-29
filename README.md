@@ -322,6 +322,8 @@ confusion_matrix.png
 
 roc_curve.png
 
+transaction_network.png
+
 vgae_loss.png
 
 rgcn_loss.png
@@ -386,6 +388,14 @@ Shows:
 
 - True Positive Rate
 - False Positive Rate
+
+### Transaction Network Graph
+
+Shows:
+
+- Accounts/transactions as a transaction graph
+- Fraud nodes highlighted in red
+- Suspicious local structure around fraudulent activity
 
 ### Training Loss Curves
 

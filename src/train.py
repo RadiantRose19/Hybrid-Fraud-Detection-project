@@ -488,7 +488,8 @@ np.save(
 
     "results_true.npy",
 
-    y[test_idx].cpu().numpy()
+    # Save true labels in the same order as prob[test_mask]
+    y[test_mask].cpu().numpy()
 
 )
 
